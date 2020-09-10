@@ -19,7 +19,9 @@ if __name__ == '__main__':
          [5,3,3,180]]
     for i in range(3):
         tabl[3][2+i] = (-1) * cf[i]
-        tabl[i+1][0]=4+i;
+        tabl[i][0]=4+i
+        # tabl[2][]
+
 
     print(cf)
     print(ogr)
