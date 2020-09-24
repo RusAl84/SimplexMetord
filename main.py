@@ -5,6 +5,15 @@ import numpy as np
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
+def rasstavit_1(tabl):
+    zagolovok=['БАЗИС','C',0,1,2,3,4,5,6]
+    for g in range(3):
+        z = tabl[g, 0]
+        for i in range(3,9):
+            if zagolovok[i]==z:
+                for j in range(4):
+                    tabl[j][i]=0
+                tabl[g][i]=1
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -17,9 +26,17 @@ if __name__ == '__main__':
     ogr=[[18,15,12,360],
          [6,4,8,192],
          [5,3,3,180]]
+    #Заполним табличку
     for i in range(3):
-        tabl[3][2+i] = (-1) * cf[i]
+        tabl[3][3+i] = (-1) * cf[i]
         tabl[i][0]=4+i
+        for j in range(3):
+            tabl[j][3+i]=ogr[j][i]
+        tabl[i][2] = ogr[i][0]
+    rasstavit_1(tabl)
+
+
+
         # tabl[2][]
 
 
