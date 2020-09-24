@@ -3,10 +3,9 @@ import numpy as np
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
+zagolovok = ['БАЗИС', 'C', 0, 1, 2, 3, 4, 5, 6]
 
 def rasstavit_1(tabl):
-    zagolovok=['БАЗИС','C',0,1,2,3,4,5,6]
     for g in range(3):
         z = tabl[g, 0]
         for i in range(3,9):
@@ -32,17 +31,33 @@ if __name__ == '__main__':
         tabl[i][0]=4+i
         for j in range(3):
             tabl[j][3+i]=ogr[j][i]
-        tabl[i][2] = ogr[i][0]
+        tabl[i][2] = ogr[i][3]
     rasstavit_1(tabl)
+    print(tabl)
 
-
-
+    #определяем вектор который будем исключить из базиса
+    nishnya_stroka=tabl[3][3:9]
+    if np.min(nishnya_stroka)<0:
+        vvodim_vektor=np.argmin(nishnya_stroka)+1
+        print("vvodim vektor " + str(vvodim_vektor))
+    #определяем вектор который исключаем
+    tri_chisla=[0,0,0]
+    for i in range(3):
+        tri_chisla[i]=tabl[i][2]/tabl[i][vvodim_vektor+2]
+        #print(tabl[i][vvodim_vektor+2])
+    print(tri_chisla)
+    pos_min=np.argmin(tri_chisla)
+    min_el=np.min(tri_chisla)
+    tabl[pos_min][0]=vvodim_vektor
+    razresh_el=tabl[pos_min][vvodim_vektor+2]
+    print("Разрешающий элемент " + str(razresh_el))
+    for i in range(3,9):
+        tabl[pos_min][i]/=razresh_el
         # tabl[2][]
 
 
-    print(cf)
-    print(ogr)
-
-    print(tabl)
+    # print(cf)
+    # print(ogr)
+    print("%i",tabl)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
