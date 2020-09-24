@@ -43,6 +43,7 @@ if __name__ == '__main__':
     #определяем вектор который исключаем
     tri_chisla=[0,0,0]
     for i in range(3):
+
         tri_chisla[i]=tabl[i][2]/tabl[i][vvodim_vektor+2]
         #print(tabl[i][vvodim_vektor+2])
     print(tri_chisla)
@@ -51,13 +52,35 @@ if __name__ == '__main__':
     tabl[pos_min][0]=vvodim_vektor
     razresh_el=tabl[pos_min][vvodim_vektor+2]
     print("Разрешающий элемент " + str(razresh_el))
-    for i in range(3,9):
+    for i in range(2,9):
         tabl[pos_min][i]/=razresh_el
         # tabl[2][]
+    bazis=[0,0,0]
+    for i in range(3):
+        bazis[i]=tabl[i][0]
+    rasstavit_1(tabl)
+
+    for i in range(1,7):
+        if i not in bazis:
+            #print("ne v bazise " + str(i))
+            i+=2
+            print(tabl[0][i])
+            for j in range(4):
+                if j != pos_min:
+                    z1=tabl[j][i]
+                    z2=tabl[j][vvodim_vektor+2]
+                    z3=tabl[pos_min][i]
+                    #print(f"{z1}  {z2} {z3} ")
+                    tabl[j][i]=z1-z2*z3
+                    # правило треугольника z1 - z2 * z3
+
+
 
 
     # print(cf)
     # print(ogr)
-    print("%i",tabl)
+    #np.set_printoptions(formatter={'float': '{: 0.1f}'.format})
+    np.set_printoptions(formatter={'float': '{:5.0f}'.format})
+    print(tabl)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
