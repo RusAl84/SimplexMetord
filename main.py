@@ -38,13 +38,18 @@ if __name__ == '__main__':
     #определяем вектор который будем исключить из базиса
     nishnya_stroka=tabl[3][3:9]
     if np.min(nishnya_stroka)<0:
-        vvodim_vektor=np.argmin(nishnya_stroka)+1
+        vvodim_vektor=np.argmin(nishnya_stroka)+3
         print("vvodim vektor " + str(vvodim_vektor))
+    # Значения вводтимого вектора столбца
+    vvodim_vektor_znach = [0, 0, 0, 0]
+    for i in range(4):
+        vvodim_vektor_znach[i]=tabl[i][vvodim_vektor]
+    print("vvodim_vektor_znach")
+    print(vvodim_vektor_znach)
     #определяем вектор который исключаем
     tri_chisla=[0,0,0]
     for i in range(3):
-
-        tri_chisla[i]=tabl[i][2]/tabl[i][vvodim_vektor+2]
+        tri_chisla[i]=tabl[i][2]/tabl[i][vvodim_vektor]
         #print(tabl[i][vvodim_vektor+2])
     print(tri_chisla)
     pos_min=np.argmin(tri_chisla)
@@ -52,18 +57,21 @@ if __name__ == '__main__':
     tabl[pos_min][0]=vvodim_vektor
     razresh_el=tabl[pos_min][vvodim_vektor+2]
     print("Разрешающий элемент " + str(razresh_el))
+    #заполняем строку  для разрешающего элемента в новой таблице
     for i in range(2,9):
+        print(tabl[pos_min][i]/razresh_el)
         tabl[pos_min][i]/=razresh_el
+
         # tabl[2][]
     bazis=[0,0,0]
     for i in range(3):
         bazis[i]=tabl[i][0]
     rasstavit_1(tabl)
 
-    for i in range(1,7):
+    for i in range(1,7):  #stolbec
         if i not in bazis:
             #print("ne v bazise " + str(i))
-            i+=2
+            i+=1
             print(tabl[0][i])
             for j in range(4):
                 if j != pos_min:
@@ -71,7 +79,9 @@ if __name__ == '__main__':
                     z2=tabl[j][vvodim_vektor+2]
                     z3=tabl[pos_min][i]
                     #print(f"{z1}  {z2} {z3} ")
-                    tabl[j][i]=z1-z2*z3
+                    #print(F"j {j}   i  {i}  z1 {z1}    z2 {z2}    z3 {z3}")
+                    print(F"j {j}   i  {i}  z1 {z1}    z2 {z2}    z3 {z3} vvodim_vektor {vvodim_vektor}")
+                    #tabl[j][i]=z1-z2*z3
                     # правило треугольника z1 - z2 * z3
 
 
@@ -80,7 +90,7 @@ if __name__ == '__main__':
     # print(cf)
     # print(ogr)
     #np.set_printoptions(formatter={'float': '{: 0.1f}'.format})
-    np.set_printoptions(formatter={'float': '{:5.0f}'.format})
+    np.set_printoptions(formatter={'float': '{:5.1f}'.format})
     print(tabl)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
